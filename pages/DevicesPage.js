@@ -15,7 +15,7 @@ class DevicesPage extends Component {
     render() {
         const { navigation } = this.props;
         return (
-           <Button onPress={() => navigation.navigate('Devices')}>
+           <Button onPress={() => navigation.navigate('Dispense')}>
                <Text>
                    Fuck
                </Text>
