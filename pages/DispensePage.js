@@ -15,7 +15,7 @@ class DispensePage extends Component {
     render() {
         const { navigation } = this.props;
         return (
-           <Button onPress={() => navigation.navigate('Landing')}>
+           <Button onPress={() => navigation.navigate('Home')}>
                <Text>
                    Me
                </Text>

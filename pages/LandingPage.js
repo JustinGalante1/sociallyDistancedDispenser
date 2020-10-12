@@ -15,7 +15,7 @@ class LandingPage extends Component {
     render() {
         const { navigation } = this.props;
         return (
-           <Button onPress={() => navigation.navigate('Devices')}>
+           <Button rounded info onPress={() => navigation.navigate('Devices')}>
                <Text>
                    Search For Dispensers
                </Text>
