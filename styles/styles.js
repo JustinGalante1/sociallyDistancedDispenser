@@ -29,7 +29,6 @@ export const LandingPageStyle = StyleSheet.create(
             alignItems: 'center',
             display: 'flex',
             flex: 1,
-            backgroundColor: 'green',
         },
         button: {
             alignSelf: 'center',
@@ -37,7 +36,8 @@ export const LandingPageStyle = StyleSheet.create(
             shadowOpacity: 50,
             shadowOffset: {width: 0, height: 4.5},
             backgroundColor: '#588DF3',
-        
+            position: 'absolute',
+            height: 45,
         },
 
         buttonText: {
@@ -58,6 +58,13 @@ export const LandingPageStyle = StyleSheet.create(
 
             display: 'flex',
 
+            position: 'absolute',
+            height: 56,
         },
+        backgroundImage: {
+            backgroundColor: 'transparent',
+            flex: 1,
+            opacity: 0.75
+        }
     }
 )
