@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {StyleSheet, View } from 'react-native';
+import {StyleSheet, Image } from 'react-native';
 
 //react-native components
-import {Button, Text, Card, Container, Content } from 'native-base';
+import {Button, Text, Container, Content } from 'native-base';
 
 //our components
 import Header from '../components/Header';
@@ -21,7 +21,8 @@ class LandingPage extends Component {
         return (
             <Container>
                 <Header title = "sociallyDistancedDispenser"/>
-                <Content contentContainerStyle={styles.container}>
+                <Content contentContainerStyle={styles.container} scrollEnabled='false'>
+                <Image source={require('../assets/HomeBackground.png')} style = {styles.backgroundImage}/>
                     <Button rounded info onPress={() => navigation.navigate('Devices')} style = {styles.button}>
                         <Text>
                             Search For Dispensers
@@ -46,6 +47,13 @@ const styles = StyleSheet.create(
             shadowColor: 'grey',
             shadowOpacity: 50,
             shadowOffset: {width: 0, height: 4.5},
+            position: 'absolute',
+            height: 56,
+        },
+        backgroundImage:{
+            backgroundColor: 'transparent',
+            flex: 1,
+            opacity: 0.75
         }
     }
 )
