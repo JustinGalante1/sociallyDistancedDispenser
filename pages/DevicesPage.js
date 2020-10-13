@@ -1,7 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import {StyleSheet, View } from 'react-native';
 
 //react-native components
-import {Button, Text} from 'native-base'
+import {Button, Text, Card, Container, Content } from 'native-base';
+
+//our components
+import Header from '../components/Header';
 
 class DevicesPage extends Component {
 

@@ -7,6 +7,10 @@ import {Button, Text, Card, Container, Content } from 'native-base';
 //our components
 import Header from '../components/Header';
 
+// styles
+import {LandingPageStyle} from '../styles/styles';
+const styles = StyleSheet.flatten(LandingPageStyle);
+
 class LandingPage extends Component {
 
     constructor(props) {
@@ -33,22 +37,47 @@ class LandingPage extends Component {
     }
 }
 
-const styles = StyleSheet.create(
+
+const sty = StyleSheet.create(
     {
         container:{
             justifyContent: 'center',
             alignItems: 'center',
             display: 'flex',
             flex: 1,
+            backgroundColor: 'green',
         },
-        button:{
+        button: {
             alignSelf: 'center',
             shadowColor: 'grey',
             shadowOpacity: 50,
             shadowOffset: {width: 0, height: 4.5},
-        }
+            backgroundColor: '#588DF3',
+        
+        },
+
+        buttonText: {
+            position: 'absolute',
+            height: 56,
+            left: 0,
+            right: 0,
+            textAlign: 'center',
+            color: '#FFFFFF',
+            
+            fontStyle: 'normal',
+            fontWeight: 'bold',
+            fontSize: 24.0667,
+            
+            
+            alignSelf: 'center',
+            textAlign: 'center',
+
+            display: 'flex',
+
+        },
     }
 )
+
 
 export default LandingPage
 
