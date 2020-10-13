@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {StyleSheet } from 'react-native';
+import {StyleSheet, View } from 'react-native';
 
 //react-native components
 import {Button, Text, Card, Container, Content } from 'native-base';
 
 //animated loader
-import AnimatedLoader from "react-native-animated-loader";
+import LottieView from "lottie-react-native";
 
 //our components
 import Header from '../components/Header';
@@ -18,7 +18,14 @@ class DevicesPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
+            loading: false,
+        }
+    }
+
+    componentDidMount() {
+        const { loading } = this.state;
+        if(loading){
+            this.animation.play();
         }
     }
 
@@ -42,7 +49,9 @@ class DevicesPage extends Component {
                         </Button>
                     }
                     {loading &&
-                        <Text> fuck </Text>
+                        <View style={styles.animationContainer}>
+                            <LottieView ref={animation => { this.animation = animation }} style={{width:450, height:300}} source={require('../assets/loading.json')}/>
+                        </View>
                     } 
                 </Content>
             </Container>

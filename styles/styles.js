@@ -64,7 +64,14 @@ export const LandingPageStyle = StyleSheet.create(
         backgroundImage: {
             backgroundColor: 'transparent',
             flex: 1,
-            opacity: 0.75
-        }
+            opacity: 0.75,
+            top: 11,
+        },
+        animationContainer: {
+            backgroundColor: 'transparent',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flex: 1,
+        },
     }
 )
