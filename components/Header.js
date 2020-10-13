@@ -1,11 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image } from 'react-native';
+import {StyleSheet, View } from 'react-native';
+import {Text} from 'native-base'
 
 const Header= (props) => {
     
     return(
         <View style={styles.container}>
-            <Text style = {styles.headerTitle}> {props.title}</Text>
+            <Text style = {styles.title}> {props.title}</Text>
         </View>
     )
 
@@ -21,16 +22,13 @@ const styles = StyleSheet.create(
             borderWidth: 1,
             justifyContent: 'flex-end',
         },
-
-        headerTitle: {
+        title: {
             color: '#F3F3F3',
-            fontSize: 24,
+            fontSize: 18,
             fontWeight: '900',
             alignSelf: 'center',
-      
         }
     }
-
 )
 
 export default Header
