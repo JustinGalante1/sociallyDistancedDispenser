@@ -8,18 +8,22 @@ import {Button, Text, Card, Container, Content } from 'native-base';
 import Header from '../components/Header';
 
 class DevicesPage extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
-             
+            loading: true,
         }
+    }
+
+    handlePress = (event) => {
+        const { navigation } = this.props;
+        navigation.navigate('Dispense');
     }
 
     render() {
         const { navigation } = this.props;
         return (
-           <Button onPress={() => navigation.navigate('Dispense')}>
+           <Button onPress={this.handlePress}>
                <Text>
                    Devices:
                </Text>

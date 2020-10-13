@@ -26,7 +26,7 @@ class LandingPage extends Component {
             <Container>
                 <Header title = "sociallyDistancedDispenser"/>
                 <Content contentContainerStyle={styles.container} scrollEnabled='false'>
-                <Image source={require('../assets/HomeBackground.png')} style = {styles.backgroundImage}/>
+                <Image source={require('../assets/LandingBackground.png')} style = {styles.backgroundImage}/>
                     <Button rounded info onPress={() => navigation.navigate('Devices')} style = {styles.button}>
                         <Text>
                             Search For Dispensers
@@ -37,10 +37,5 @@ class LandingPage extends Component {
         )
     }
 }
-
-
-
-
-
 export default LandingPage
 
