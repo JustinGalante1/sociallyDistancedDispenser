@@ -19,14 +19,18 @@ const styles = StyleSheet.create(
             height: 80,
             width: "100%",
             backgroundColor: '#588DF3',
-            borderWidth: 1,
+            borderWidth: 0,
             justifyContent: 'flex-end',
+            shadowColor: 'grey',
+            shadowOpacity: 100,
+            shadowOffset: {width: 0, height: 4.5},
         },
         title: {
             color: '#F3F3F3',
             fontSize: 18,
-            fontWeight: '900',
+            fontWeight: '500',
             alignSelf: 'center',
+            
         }
     }
 )

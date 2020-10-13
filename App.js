@@ -24,7 +24,6 @@ export default class App extends React.Component{
   render(){
     return (
       <NavigationContainer>
-        <Header title = "sociallyDistancedDispenser"/>
         <Stack.Navigator screenOptions = {{
           headerShown: false
         }}>
@@ -37,3 +36,5 @@ export default class App extends React.Component{
     );
   }
 }
+
+
