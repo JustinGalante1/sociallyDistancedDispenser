@@ -15,10 +15,10 @@ const Header= (props) => {
 const styles = StyleSheet.create(
     {
         container:{
-            height: 60,
+            height: 80,
             width: "100%",
-            borderColor: 'white',
-            backgroundColor: '#123456',
+            //borderColor: 'white',
+            backgroundColor: '#588DF3',
             borderWidth: 1,
         },
 
