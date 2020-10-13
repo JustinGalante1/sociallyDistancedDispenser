@@ -5,7 +5,7 @@ const Header= (props) => {
     
     return(
         <View style={styles.container}>
-            <Text style = {styles.title}> {props.title}</Text>
+            <Text style = {styles.headerTitle}> {props.title}</Text>
         </View>
     )
 
@@ -19,14 +19,15 @@ const styles = StyleSheet.create(
             width: "100%",
             backgroundColor: '#588DF3',
             borderWidth: 1,
+            justifyContent: 'flex-end',
         },
 
-        title: {
+        headerTitle: {
             color: '#F3F3F3',
-            fontSize: 28,
+            fontSize: 24,
             fontWeight: '900',
-            textTransform: 'uppercase'
-
+            alignSelf: 'center',
+      
         }
     }
 

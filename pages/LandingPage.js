@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {StyleSheet, View, Image } from 'react-native';
 
 //react-native components
 import {Button, Text} from 'native-base'
@@ -15,14 +16,28 @@ class LandingPage extends Component {
     render() {
         const { navigation } = this.props;
         return (
-           <Button rounded info onPress={() => navigation.navigate('Devices')}>
-               <Text>
-                   Search For Dispensers
-               </Text>
-           </Button>
+            <View style = {styles.container} >
+                <Button rounded info onPress={() => navigation.navigate('Devices')} style = {styles.buttonContainer} >
+                    <Text>
+                        Search For Dispensers
+                    </Text>
+                </Button>
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create(
+    {
+        container:{
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        buttonContainer:{
+            alignSelf: 'center',
+        }
+    }
+)
 
 export default LandingPage
 

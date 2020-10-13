@@ -27,7 +27,8 @@ export default class App extends React.Component{
       
 
       <NavigationContainer>
-        <Header title = "Fuckmedaddy" />
+        <Header title = "sociallyDistancedDispenser"/>
+        
         <Stack.Navigator>
           <Stack.Screen name = "Home" component = {LandingPage}/>
           <Stack.Screen name = "Devices" component = {DevicesPage}/>
@@ -40,9 +41,9 @@ export default class App extends React.Component{
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000000',
+  
+  headerBox: {
+    justifyContent: "center",
   }
   // ,
   // statusbar: {
