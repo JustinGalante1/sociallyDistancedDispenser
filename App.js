@@ -23,12 +23,10 @@ export default class App extends React.Component{
   }
 
   render(){
-    const statusbar = (Platform.OS == 'ios') ? <View style={styles.statusbar}></View> : <View></View>; //{statusbar}
     return (
       
 
       <NavigationContainer>
-        {statusbar}
         <Header title = "Fuckmedaddy" />
         <Stack.Navigator>
           <Stack.Screen name = "Home" component = {LandingPage}/>
@@ -45,9 +43,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
-  },
-  statusbar: {
-    backgroundColor: '#FFCE00',
-    height: 20
   }
+  // ,
+  // statusbar: {
+  //   backgroundColor: '#FFCE00',
+  //   height: 20
+  // }
 });
