@@ -24,7 +24,7 @@ class LandingPage extends Component {
         const { navigation } = this.props;
         return (
             <Container>
-                <Header title = "sociallyDistancedDispenser"/>
+                <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton = {false}/>
                 <Content contentContainerStyle={styles.container} scrollEnabled='false'>
                 <Image source={require('../assets/LandingBackground.png')} style = {styles.backgroundImage}/>
                     <Button rounded info onPress={() => navigation.navigate('Devices')} style = {styles.button}>
