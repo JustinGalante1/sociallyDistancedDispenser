@@ -3,8 +3,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet } from 'react-native'; 
-import Header from './components/Header';
 
 //pages
 import LandingPage from './pages/LandingPage';

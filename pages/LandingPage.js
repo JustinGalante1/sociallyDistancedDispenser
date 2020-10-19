@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Image } from 'react-native';
+import {StyleSheet, ImageBackground } from 'react-native';
 
 //react-native components
 import {Button, Text, Container, Content } from 'native-base';
@@ -8,8 +8,8 @@ import {Button, Text, Container, Content } from 'native-base';
 import Header from '../components/Header';
 
 // styles
-import {LandingPageStyle} from '../styles/styles';
-const styles = StyleSheet.flatten(LandingPageStyle);
+import {PageStyle} from '../styles/styles';
+const styles = StyleSheet.flatten(PageStyle);
 
 class LandingPage extends Component {
 
@@ -26,12 +26,13 @@ class LandingPage extends Component {
             <Container>
                 <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton = {false}/>
                 <Content contentContainerStyle={styles.container} scrollEnabled='false'>
-                    <Image source={require('../assets/LandingBackground.png')} style = {styles.backgroundImage}/>
-                    <Button rounded info onPress={() => navigation.navigate('Devices')} style = {styles.button}>
-                        <Text>
-                            Search For Dispensers
-                        </Text>
-                    </Button>
+                    <ImageBackground source={require('../assets/LandingBackground.png')} style = {styles.backgroundImageCenter}>
+                        <Button rounded info onPress={() => navigation.navigate('Devices')} style = {styles.button}>
+                            <Text>
+                                Search For Dispensers
+                            </Text>
+                        </Button>
+                    </ImageBackground>
                 </Content>
             </Container>
         )

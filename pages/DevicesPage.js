@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, FlatList } from 'react-native';
+import {StyleSheet, View, ImageBackground } from 'react-native';
 
 //native baes components
-import { Card, Container, Content, Text, CardItem, Body } from 'native-base';
+import { Card, Container, Content, Text, CardItem, Icon, Right } from 'native-base';
 
 //animated loader
 import LottieView from "lottie-react-native";
 
 //our components
-
 import Header from '../components/Header';
 
 // styles
-import {LandingPageStyle} from '../styles/styles';
-const styles = StyleSheet.flatten(LandingPageStyle);
+import {PageStyle} from '../styles/styles';
+const styles = StyleSheet.flatten(PageStyle);
 
 class DevicesPage extends Component {
     constructor(props) {
@@ -22,16 +21,13 @@ class DevicesPage extends Component {
             loading: false,
             items: [
                 {
-                    title: "Rice Disepnser",
-                    desc: "fuck me in teh ass",
+                    title: "Rice Dispenser",
                 },
                 {
                     title: "Bean Dispenser",
-                    desc: "This nigga eatin beans",
                 },
                 {
                     title: "Cereal Dispenser",
-                    desc: "cummy in my tummy",
                 },
             ]
         }
@@ -55,33 +51,35 @@ class DevicesPage extends Component {
 
         return (
             <Container>
-                <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton = {true}/>
-                <Content contentContainerStyle={styles.container} scrollEnabled='false'>
-                    {!loading && 
-                        <Button rounded info onPress={() => navigation.navigate('Dispense')} style = {styles.button}>
-                            <Text>
-                                Devices:
-                            </Text>
-                        </Button>
-                    }
-                    {loading &&
-                        <View style={styles.animationContainer}>
-                            <LottieView ref={animation => { this.animation = animation }} style={{width:450, height:300}} source={require('../assets/loading.json')}/>
-                        </View>
-                    } 
-                </Content>
+                <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton={true}/>
+                    <Content contentContainerStyle = {styles.deviceListContent} scrollEnabled='false'>
+                        <ImageBackground source={require('../assets/LandingBackground.png')} style = {styles.backgroundImageTop}>
+                            {!loading &&
+                                    this.state.items.map((item, index) =>{
+                                        return(
+                                            <Card key={index} style = {styles.card}>
+                                                <CardItem button onPress={()=>navigation.navigate('Dispense')}>
+                                                    <Text style = {styles.buttonText}>
+                                                        {item.title}
+                                                    </Text>
+                                                    <Right style = {{flex: 1}}>
+                                                        <Icon name="arrow-forward" style={{color: '#588DF3'}}/>
+                                                    </Right>
+                                                </CardItem>
+                                            </Card>
+                                        )
+                                    })       
+                            }
+                            {loading &&
+                                <View style={styles.animationContainer}>
+                                    <LottieView ref={animation => { this.animation = animation }} style={{width:450, height:300}} source={require('../assets/loading.json')}/>
+                                </View>
+                            }
+                        </ImageBackground>
+                    </Content> 
             </Container>
         )
     }
 }
-
-{/*
-                                <Button rounded info onPress={() => navigation.navigate('Dispense')} style = {styles.button}>
-                                    <Text>
-                                        Devices:
-                                    </Text>
-                                </Button>
-                                */}
-
 
 export default DevicesPage

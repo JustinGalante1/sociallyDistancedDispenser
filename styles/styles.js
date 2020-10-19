@@ -1,37 +1,39 @@
 import {StyleSheet } from 'react-native';
 
+import background from '../assets/LandingBackground.png';
+
 export const HeaderStyle = StyleSheet.create(
     {
         container:{
             height: 80,
             width: "100%",
             backgroundColor: '#588DF3',
-            borderWidth: 0,
             justifyContent: 'flex-end',
             shadowColor: 'grey',
             shadowOpacity: 100,
             shadowOffset: {width: 0, height: 4.5},
         },
         title: {
+            marginBottom: 5,
             color: '#F3F3F3',
             fontSize: 18,
             fontWeight: '500',
             alignSelf: 'center',
         },
         back_button: {
-            alignSelf: 'flex-start',
             color: '#F3F3F3',
-            backgroundColor: '#000000',
+            backgroundColor: 'transparent',
             fontSize: 18,
             fontWeight: '500',
             position: 'absolute',
-            height: 35,
-            width: 35,
+            height: '100%',
+            width: '100%',
+            alignItems: 'flex-end'
         },
     }
 )
 
-export const LandingPageStyle = StyleSheet.create(
+export const PageStyle = StyleSheet.create(
     {
         container:{
             justifyContent: 'center',
@@ -41,7 +43,6 @@ export const LandingPageStyle = StyleSheet.create(
             //backgroundColor: 'green',
         },
         deviceListContent:{
-            marginTop: 20,
             display: 'flex',
             flex: 1,
             justifyContent: 'flex-start',
@@ -56,31 +57,23 @@ export const LandingPageStyle = StyleSheet.create(
             position: 'absolute',
             height: 45,
         },
-        buttonText: {
-            position: 'absolute',
-            height: 56,
-            left: 0,
-            right: 0,
-            textAlign: 'center',
-            color: '#FFFFFF',
-            
-            fontStyle: 'normal',
-            fontWeight: 'bold',
-            fontSize: 24.0667,
-            
-            alignSelf: 'center',
-            textAlign: 'center',
-
-            display: 'flex',
-
-            position: 'absolute',
-            height: 56,
-        },
-        backgroundImage: {
+        backgroundImageCenter: {
             backgroundColor: 'transparent',
             flex: 1,
             opacity: 0.75,
             top: 11,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        backgroundImageTop: {
+            backgroundColor: 'transparent',
+            flex: 1,
+            opacity: 0.75,
+            top: 11,
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
         },
         animationContainer: {
             //backgroundColor: 'blue',
@@ -98,6 +91,14 @@ export const LandingPageStyle = StyleSheet.create(
         },
         card: {
             width: '90%',
+            shadowColor: 'grey',
+            shadowOpacity: 50,
+            shadowOffset: {width: 0, height: 4.5},
+        },
+        buttonText: {
+            color: '#588DF3',
+            fontSize: 18,
+            fontWeight: '500',
         }
     }
 )
