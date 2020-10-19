@@ -20,19 +20,13 @@ export const HeaderStyle = StyleSheet.create(
         },
         back_button: {
             alignSelf: 'flex-start',
-            // shadowColor: 'grey',
-            // shadowOpacity: 50,
-            // shadowOffset: {width: 0, height: 4.5},
             color: '#F3F3F3',
             fontSize: 18,
             fontWeight: '500',
             backgroundColor: '#588DF3',
             position: 'absolute',
-            height: 26,
-            width: 30,
-            left: 0,
-            padding: 0,
-            margin: 0,
+            height: 35,
+            width: 35,
         },
     }
 )
@@ -44,6 +38,14 @@ export const LandingPageStyle = StyleSheet.create(
             alignItems: 'center',
             display: 'flex',
             flex: 1,
+            //backgroundColor: 'green',
+        },
+        deviceListContent:{
+            marginTop: 20,
+            display: 'flex',
+            flex: 1,
+            justifyContent: 'flex-start',
+            alignItems: 'center',
         },
         button: {
             alignSelf: 'center',
@@ -54,7 +56,6 @@ export const LandingPageStyle = StyleSheet.create(
             position: 'absolute',
             height: 45,
         },
-
         buttonText: {
             position: 'absolute',
             height: 56,
@@ -66,7 +67,6 @@ export const LandingPageStyle = StyleSheet.create(
             fontStyle: 'normal',
             fontWeight: 'bold',
             fontSize: 24.0667,
-            
             
             alignSelf: 'center',
             textAlign: 'center',
@@ -83,10 +83,21 @@ export const LandingPageStyle = StyleSheet.create(
             top: 11,
         },
         animationContainer: {
-            backgroundColor: 'transparent',
+            //backgroundColor: 'blue',
             alignItems: 'center',
             justifyContent: 'center',
             flex: 1,
+            display: 'flex',
+            width: '100%',
         },
+        contentContainer: {
+            display: 'flex',
+            flex: 1,
+            //backgroundColor: 'purple',
+            width: '100%',
+        },
+        card: {
+            width: '90%',
+        }
     }
 )

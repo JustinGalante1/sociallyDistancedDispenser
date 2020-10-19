@@ -1,6 +1,9 @@
 const { RectButton } = require("react-native-gesture-handler");
 import React, { Component } from 'react'
 
+//Native-base
+import { Text, Card, CardItem, Body } from 'native-base';
+
 export class DeviceListItem extends Component {
 
     constructor(props) {
@@ -12,9 +15,15 @@ export class DeviceListItem extends Component {
 
     render() {
         return (
-            <div>
-                I'm one device in a list of many
-            </div>
+            <Card>
+                <CardItem>
+                    <Body>
+                        <Text>
+                            {this.props.title}
+                        </Text>
+                    </Body>
+                </CardItem>
+            </Card>
         )
     }
 }

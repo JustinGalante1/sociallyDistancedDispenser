@@ -8,7 +8,6 @@ const styles = StyleSheet.flatten(HeaderStyle);
 const Header= (props) => {
     const { navigation } = props.navigation;
     return(
-
         <View style={styles.container}>
             <Button title="Go back" onPress={() => navigation.goBack()} style = {styles.back_button}>
                 <Text>
