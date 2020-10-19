@@ -58,7 +58,9 @@ class DevicesPage extends Component {
                                     this.state.items.map((item, index) =>{
                                         return(
                                             <Card key={index} style = {styles.card}>
-                                                <CardItem button onPress={()=>navigation.navigate('Dispense')}>
+                                                <CardItem button onPress={()=>navigation.navigate('Dispense', {
+                                                    itemName: item.title,
+                                                })}>
                                                     <Text style = {styles.buttonText}>
                                                         {item.title}
                                                     </Text>

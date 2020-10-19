@@ -21,14 +21,15 @@ class DispensePage extends Component {
     }
 
     render() {
-        const { navigation } = this.props;
+        const { route, navigation } = this.props;
+        const itemName = route.params.itemName;
         return (
             <Container>
-                <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton = {true}/>
+                <Header title = {itemName} navigation = {this.props} backbutton = {true}/>
                 <Content contentContainerStyle={styles.container} scrollEnabled='false'>
                     <Button rounded info onPress={() => navigation.navigate('Home')} style = {styles.button}>
                         <Text>
-                            Me
+                            Dispense
                         </Text>
                     </Button>
                 </Content>
