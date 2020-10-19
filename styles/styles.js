@@ -17,8 +17,23 @@ export const HeaderStyle = StyleSheet.create(
             fontSize: 18,
             fontWeight: '500',
             alignSelf: 'center',
-            
-        }
+        },
+        back_button: {
+            alignSelf: 'flex-start',
+            // shadowColor: 'grey',
+            // shadowOpacity: 50,
+            // shadowOffset: {width: 0, height: 4.5},
+            color: '#F3F3F3',
+            fontSize: 18,
+            fontWeight: '500',
+            backgroundColor: '#588DF3',
+            position: 'absolute',
+            height: 26,
+            width: 30,
+            left: 0,
+            padding: 0,
+            margin: 0,
+        },
     }
 )
 

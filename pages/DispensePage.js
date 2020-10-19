@@ -5,7 +5,7 @@ import {StyleSheet } from 'react-native';
 import {Button, Text, Card, Container, Content } from 'native-base';
 
 //our components
-import Header from '../components/Header';
+import HeaderBackButton from '../components/HeaderBackButton';
 
 // styles
 import {LandingPageStyle} from '../styles/styles';
@@ -24,7 +24,8 @@ class DispensePage extends Component {
         const { navigation } = this.props;
         return (
             <Container>
-                <Header title = "sociallyDistancedDispenser"/>
+                <HeaderBackButton title = "sociallyDistancedDispenser" navigation = {this.props}/>
+                
                 <Content contentContainerStyle={styles.container} scrollEnabled='false'>
                 <Button rounded info onPress={() => navigation.navigate('Home')} style = {styles.button}>
                     <Text>

@@ -8,7 +8,7 @@ import {Button, Text, Card, Container, Content } from 'native-base';
 import LottieView from "lottie-react-native";
 
 //our components
-import Header from '../components/Header';
+import HeaderBackButton from '../components/HeaderBackButton';
 
 // styles
 import {LandingPageStyle} from '../styles/styles';
@@ -39,7 +39,7 @@ class DevicesPage extends Component {
         const { loading } = this.state;
         return (
             <Container>
-                <Header title = "sociallyDistancedDispenser"/>
+                <HeaderBackButton title = "sociallyDistancedDispenser" navigation = {this.props}/>
                 <Content contentContainerStyle={styles.container} scrollEnabled='false'>
                     {!loading && 
                         <Button rounded info onPress={() => navigation.navigate('Dispense')} style = {styles.button}>
