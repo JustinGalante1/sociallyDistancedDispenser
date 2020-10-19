@@ -8,7 +8,7 @@ import { Card, Container, Content, Text, CardItem, Body } from 'native-base';
 import LottieView from "lottie-react-native";
 
 //our components
-import HeaderBackButton from '../components/HeaderBackButton';
+
 import Header from '../components/Header';
 
 // styles
@@ -55,28 +55,21 @@ class DevicesPage extends Component {
 
         return (
             <Container>
-                <HeaderBackButton title = "sociallyDistancedDispenser" navigation = {this.props}/>
-                    <Content contentContainerStyle = {styles.deviceListContent}>
-                        {!loading &&
-                                this.state.items.map((item, index) =>{
-                                    return(
-                                        <Card key={index} style = {styles.card}>
-                                            <CardItem button onPress={()=>navigation.navigate('Dispense')}>
-                                                <Text>
-                                                    {item.title}{"\n"}
-                                                    {item.desc}
-                                                </Text>
-                                            </CardItem>
-                                        </Card>
-                                    )
-                                })       
-                        }
-                        {loading &&
-                            <View style={styles.animationContainer}>
-                                <LottieView ref={animation => { this.animation = animation }} style={{width:450, height:300}} source={require('../assets/loading.json')}/>
-                            </View>
-                        }
-                    </Content> 
+                <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton = {true}/>
+                <Content contentContainerStyle={styles.container} scrollEnabled='false'>
+                    {!loading && 
+                        <Button rounded info onPress={() => navigation.navigate('Dispense')} style = {styles.button}>
+                            <Text>
+                                Devices:
+                            </Text>
+                        </Button>
+                    }
+                    {loading &&
+                        <View style={styles.animationContainer}>
+                            <LottieView ref={animation => { this.animation = animation }} style={{width:450, height:300}} source={require('../assets/loading.json')}/>
+                        </View>
+                    } 
+                </Content>
             </Container>
         )
     }

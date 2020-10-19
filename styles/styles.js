@@ -21,9 +21,9 @@ export const HeaderStyle = StyleSheet.create(
         back_button: {
             alignSelf: 'flex-start',
             color: '#F3F3F3',
+            backgroundColor: '#000000',
             fontSize: 18,
             fontWeight: '500',
-            backgroundColor: '#588DF3',
             position: 'absolute',
             height: 35,
             width: 35,
