@@ -70,7 +70,6 @@ class DispensePage extends Component {
                         }
                     </View>
                     
-                    <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center'}}>
                         <Picker
                             headerStyle = {{backgroundColor: '#588df3'}}
                             headerTitleStyle = {{ color: '#fff', fontWeight: '500'}}
