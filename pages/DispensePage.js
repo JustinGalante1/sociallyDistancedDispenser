@@ -34,17 +34,19 @@ class DispensePage extends Component {
         return (
             <Container>
                 <Header title = {itemName} navigation = {this.props} backbutton = {true}/>
-                <Content contentContainerStyle={styles.imageContent} scrollEnabled='false'>
-                    {itemName === "Rice Dispenser" &&
-                        <Image source={require('../assets/rice2.jpeg')} style = {styles.image}/> 
-                    }
-                    {itemName === "Cereal Dispenser" &&
-                        <Image source={require('../assets/cereal2.jpg')} style = {styles.image}/>
-                    }
-                    {itemName === "Bean Dispenser" &&
-                        <Image source={require('../assets/beans2.jpg')} style = {styles.image}/>
-                    }
-
+                <Content contentContainerStyle={styles.imageContainer} scrollEnabled='false'>
+                    <View style = {{flex: 2, width: '100%', backgroundColor: 'green'}}>
+                        {itemName === "Rice Dispenser" &&
+                            <Image source={require('../assets/rice2.jpeg')} style = {styles.image}/> 
+                        }
+                        {itemName === "Cereal Dispenser" &&
+                            <Image source={require('../assets/cereal2.jpg')} style = {styles.image}/>
+                        }
+                        {itemName === "Bean Dispenser" &&
+                            <Image source={require('../assets/beans2.jpg')} style = {styles.image}/>
+                        }
+                    </View>
+                    
                     <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
                         
                         <Picker
