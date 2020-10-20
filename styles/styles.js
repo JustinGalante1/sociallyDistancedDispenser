@@ -116,7 +116,7 @@ export const PageStyle = StyleSheet.create(
         },
         image: {
             backgroundColor: 'transparent',
-            flex: 2,
+            flex: 1,
             width: '100%',
             position: 'relative',
         },
