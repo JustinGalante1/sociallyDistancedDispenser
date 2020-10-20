@@ -18,8 +18,8 @@ class DispensePage extends Component {
         super(props)
         this.state = {
              selected: undefined,
-             submitted: false,
              animation: new Animated.Value(1),
+             imageOpacity: new Animated.Value(0),
         }
     }
     fadeOut() {
@@ -30,7 +30,7 @@ class DispensePage extends Component {
           }).start(()=>{
             Animated.timing(this.state.animation,{
               toValue : 1,
-              duration : 400,
+              duration : 200,
               useNativeDriver: true,
             }).start();
           })                       
@@ -42,10 +42,17 @@ class DispensePage extends Component {
         });
     }
 
+    onLoad = () => {
+        Animated.timing(this.state.imageOpacity, {
+            toValue: 1,
+            duration: 400,
+            useNativeDriver: true,
+        }).start();
+    }
+
     handleSubmit(event){
         this.setState({
             selected: undefined,
-            submitted: true,
         })
         this.fadeOut();
     }
@@ -53,20 +60,33 @@ class DispensePage extends Component {
     render() {
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
+
+        var images = [
+            require('../assets/rice2.jpeg'),
+            require('../assets/cereal2.jpg'),
+            require('../assets/beans2.jpg')
+        ]
+
+        if(itemName === "Rice Dispenser"){
+            var index = 0;    
+        }
+        else if(itemName === "Cereal Dispenser"){
+            var index = 1;
+        }
+        else{
+            var index = 2;
+        }
         return (
             <Container>
                 <OurHeader title = {itemName} navigation = {this.props} backbutton = {true}/>
                 <Content contentContainerStyle={styles.imageContainer} scrollEnabled='false'>
+                    
                     <View style = {{flex: 2, width: '100%'}}>
-                        {itemName === "Rice Dispenser" &&
-                            <Image source={require('../assets/rice2.jpeg')} style = {styles.image}/> 
-                        }
-                        {itemName === "Cereal Dispenser" &&
-                            <Image source={require('../assets/cereal2.jpg')} style = {styles.image}/>
-                        }
-                        {itemName === "Bean Dispenser" &&
-                            <Image source={require('../assets/beans2.jpg')} style = {styles.image}/>
-                        }
+                        <Animated.Image source={images[index]} onLoad = {this.onLoad} style = {{
+                                    backgroundColor: 'transparent',
+                                    flex: 1,
+                                    width: '100%',
+                                    position: 'relative', opacity: this.state.imageOpacity}}/>
                     </View>
 
                     <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center'}}>
