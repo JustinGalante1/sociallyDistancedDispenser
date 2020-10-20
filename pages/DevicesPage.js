@@ -53,9 +53,9 @@ class DevicesPage extends Component {
             <Container>
                 <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton={true}/>
                     <Content contentContainerStyle = {styles.deviceListContent} scrollEnabled='false'>
-                        <ImageBackground source={require('../assets/LandingBackground.png')} style = {styles.backgroundImageTop}>
                             {!loading &&
-                                    this.state.items.map((item, index) =>{
+                                <ImageBackground source={require('../assets/LandingBackground.png')} style = {styles.backgroundImageTop}>
+                                    {this.state.items.map((item, index) =>{
                                         return(
                                             <Card key={index} style = {styles.card}>
                                                 <CardItem button onPress={()=>navigation.navigate('Dispense', {
@@ -70,14 +70,15 @@ class DevicesPage extends Component {
                                                 </CardItem>
                                             </Card>
                                         )
-                                    })       
+                                    })}
+                                </ImageBackground>       
                             }
                             {loading &&
                                 <View style={styles.animationContainer}>
                                     <LottieView ref={animation => { this.animation = animation }} style={{width:450, height:300}} source={require('../assets/loading.json')}/>
                                 </View>
                             }
-                        </ImageBackground>
+                        
                     </Content> 
             </Container>
         )
