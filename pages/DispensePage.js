@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Image, Animated, LogBox } from 'react-native';
-LogBox.ignoreAllLogs();//Ignore all log notifications
+import {StyleSheet, Image, Animated } from 'react-native';
 
 //react-native components
 import {Button, Header, Text, Container, Content, Picker, Icon, View, Left, Right, Body, Title} from 'native-base';
@@ -69,7 +68,8 @@ class DispensePage extends Component {
                             <Image source={require('../assets/beans2.jpg')} style = {styles.image}/>
                         }
                     </View>
-                    
+
+                    <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center'}}>
                         <Picker
                             headerStyle = {{backgroundColor: '#588df3'}}
                             headerTitleStyle = {{ color: '#fff', fontWeight: '500'}}
