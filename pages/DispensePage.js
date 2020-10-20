@@ -34,8 +34,7 @@ class DispensePage extends Component {
         return (
             <Container>
                 <Header title = {itemName} navigation = {this.props} backbutton = {true}/>
-                <Content contentContainerStyle={styles.imageContainer} scrollEnabled='false'>
-                    
+                <Content contentContainerStyle={styles.imageContent} scrollEnabled='false'>
                     {itemName === "Rice Dispenser" &&
                         <Image source={require('../assets/rice2.jpeg')} style = {styles.image}/> 
                     }
@@ -47,6 +46,7 @@ class DispensePage extends Component {
                     }
 
                     <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
+                        
                         <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
