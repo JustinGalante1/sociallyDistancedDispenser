@@ -47,8 +47,10 @@ class DispensePage extends Component {
                         }
                     </View>
                     
-                    <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
-                        
+                    <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'space-evenly', flexDirection: 'row'}}>
+                        <Text>
+                            Amount (oz.)
+                        </Text>
                         <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}

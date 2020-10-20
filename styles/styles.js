@@ -127,5 +127,8 @@ export const PageStyle = StyleSheet.create(
             flex: 1,
             display: 'flex',
         },
+        amountText: {
+            
+        }
     }
 )
