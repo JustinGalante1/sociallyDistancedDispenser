@@ -116,15 +116,16 @@ export const PageStyle = StyleSheet.create(
         },
         image: {
             backgroundColor: 'transparent',
-            flex: 1,
-            width: 350,
+            flex: 2,
+            width: '100%',
             position: 'relative',
-            marginTop: 10,
         },
         imageContainer: {
+            backgroundColor: 'transparent',
             justifyContent: 'flex-start',
             alignItems: 'center',
-        }
-        
+            flex: 1,
+            display: 'flex',
+        },
     }
 )

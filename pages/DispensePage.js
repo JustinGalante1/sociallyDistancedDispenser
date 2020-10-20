@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, Image } from 'react-native';
 
 //react-native components
-import {Button, Text, Container, Content, Picker, Icon, Form } from 'native-base';
+import {Button, Text, Container, Content, Picker, Icon, View } from 'native-base';
 
 //our components
 import Header from '../components/Header';
@@ -37,16 +37,16 @@ class DispensePage extends Component {
                 <Content contentContainerStyle={styles.imageContainer} scrollEnabled='false'>
                     
                     {itemName === "Rice Dispenser" &&
-                        <Image source={require('../assets/rice.png')} style = {styles.image} resizeMode ='contain'/>
+                        <Image source={require('../assets/rice2.jpeg')} style = {styles.image}/> 
                     }
                     {itemName === "Cereal Dispenser" &&
-                        <Image source={require('../assets/cereal.png')} style = {styles.image} resizeMode ='contain'/>
+                        <Image source={require('../assets/cereal2.jpg')} style = {styles.image}/>
                     }
                     {itemName === "Bean Dispenser" &&
-                        <Image source={require('../assets/bean.png')} style = {styles.image} resizeMode ='contain'/>
+                        <Image source={require('../assets/beans2.jpg')} style = {styles.image}/>
                     }
 
-                    <SafeAreaView style = {{flex: 1}}>
+                    <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
                         <Picker
                             mode="dropdown"
                             iosIcon={<Icon name="arrow-down" />}
@@ -65,12 +65,14 @@ class DispensePage extends Component {
                         </Picker>
                     </SafeAreaView>
 
-
-                    <Button rounded info onPress={() => navigation.navigate('Home')} style = {styles.dispenseButton}>
-                        <Text>
-                            Dispense
-                        </Text>
-                    </Button>
+                    <View style = {{flex:1, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
+                        <Button rounded info onPress={() => navigation.navigate('Home')} style = {styles.dispenseButton}>
+                            <Text>
+                                Dispense
+                            </Text>
+                        </Button>
+                    </View>
+                    
                 </Content>
             </Container>
         )
