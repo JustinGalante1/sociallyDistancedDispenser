@@ -62,6 +62,15 @@ export const PageStyle = StyleSheet.create(
             position: 'absolute',
             height: 45,
         },
+        dispenseButton: {
+            alignSelf: 'center',
+            shadowColor: 'grey',
+            shadowOpacity: 50,
+            shadowOffset: {width: 0, height: 4.5},
+            backgroundColor: '#588DF3',
+            position: 'relative',
+            height: 45,
+        },
         backgroundImageCenter: {
             backgroundColor: 'transparent',
             flex: 1,
@@ -108,13 +117,14 @@ export const PageStyle = StyleSheet.create(
         image: {
             backgroundColor: 'transparent',
             flex: 1,
-            opacity: 0.75,
-            top: 11,
-            width: null,
-            height: null,
-            resizeMode: 'contain',
-            alignItems: 'center',
+            width: 350,
+            position: 'relative',
+            marginTop: 10,
+        },
+        imageContainer: {
             justifyContent: 'flex-start',
+            alignItems: 'center',
         }
+        
     }
 )
