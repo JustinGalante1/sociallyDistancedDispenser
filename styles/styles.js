@@ -21,15 +21,20 @@ export const HeaderStyle = StyleSheet.create(
             alignSelf: 'center',
         },
         back_button: {
-            color: '#F3F3F3',
+            alignSelf: 'flex-start', // the button will be on the left side
+            justifyContent: 'flex-start', // the text in the button will be on the left side
+            alignItems: 'flex-end', // the text in the button will be on the bottom side
             backgroundColor: 'transparent',
-            fontSize: 18,
-            fontWeight: '500',
+            backgroundColor: 'transparent',
             position: 'absolute',
             height: '100%',
             width: '100%',
-            alignItems: 'flex-end'
         },
+        button_text: {
+            color: '#F3F3F3',
+            fontSize: 18,
+            fontWeight: '500',
+        }
     }
 )
 
@@ -99,6 +104,17 @@ export const PageStyle = StyleSheet.create(
             color: '#588DF3',
             fontSize: 18,
             fontWeight: '500',
+        },
+        image: {
+            backgroundColor: 'transparent',
+            flex: 1,
+            opacity: 0.75,
+            top: 11,
+            width: null,
+            height: null,
+            resizeMode: 'contain',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
         }
     }
 )

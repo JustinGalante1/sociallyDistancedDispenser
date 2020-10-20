@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet } from 'react-native';
+import {StyleSheet, Image } from 'react-native';
 
 //react-native components
 import {Button, Text, Container, Content } from 'native-base';
@@ -21,14 +21,21 @@ class DispensePage extends Component {
     }
 
     render() {
-        const { navigation } = this.props;
+        const { route, navigation } = this.props;
+        const itemName = route.params.itemName;
         return (
             <Container>
-                <Header title = "sociallyDistancedDispenser" navigation = {this.props} backbutton = {true}/>
+                <Header title = {itemName} navigation = {this.props} backbutton = {true}/>
                 <Content contentContainerStyle={styles.container} scrollEnabled='false'>
+                    {itemName === "Rice Dispenser" &&
+                        <Image source={require('../assets/rice.png')} style = {styles.image}/>
+                    }
+                    {itemName === "Cereal Dispenser" &&
+                        <Image source={require('../assets/cereal.png')} style = {styles.image}/>
+                    }
                     <Button rounded info onPress={() => navigation.navigate('Home')} style = {styles.button}>
                         <Text>
-                            Me
+                            Dispense
                         </Text>
                     </Button>
                 </Content>
