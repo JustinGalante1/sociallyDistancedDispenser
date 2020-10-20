@@ -68,7 +68,6 @@ export const PageStyle = StyleSheet.create(
             shadowOpacity: 50,
             shadowOffset: {width: 0, height: 4.5},
             backgroundColor: '#588DF3',
-            position: 'relative',
             height: 45,
         },
         backgroundImageCenter: {

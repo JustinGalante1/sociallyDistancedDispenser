@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {StyleSheet, Image } from 'react-native';
+import {StyleSheet, Image, Animated, LogBox } from 'react-native';
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 //react-native components
-import {Button, Text, Container, Content, Picker, Icon, View } from 'native-base';
+import {Button, Header, Text, Container, Content, Picker, Icon, View, Left, Right, Body, Title} from 'native-base';
 
 //our components
-import Header from '../components/Header';
+import OurHeader from '../components/Header';
 
 // styles
 import {PageStyle} from '../styles/styles';
@@ -18,24 +19,46 @@ class DispensePage extends Component {
         super(props)
         this.state = {
              selected: undefined,
+             submitted: false,
+             animation: new Animated.Value(1),
         }
     }
+    fadeOut() {
+        Animated.timing(this.state.animation, {
+            toValue : 0,
+            timing : 400,
+            useNativeDriver: true,
+          }).start(()=>{
+            Animated.timing(this.state.animation,{
+              toValue : 1,
+              duration : 400,
+              useNativeDriver: true,
+            }).start();
+          })                       
+     }
 
     onValueChange(value) {
         this.setState({
-            selected: value
+            selected: value,
         });
     }
 
+    handleSubmit(event){
+        this.setState({
+            selected: undefined,
+            submitted: true,
+        })
+        this.fadeOut();
+    }
 
     render() {
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
         return (
             <Container>
-                <Header title = {itemName} navigation = {this.props} backbutton = {true}/>
+                <OurHeader title = {itemName} navigation = {this.props} backbutton = {true}/>
                 <Content contentContainerStyle={styles.imageContainer} scrollEnabled='false'>
-                    <View style = {{flex: 2, width: '100%', backgroundColor: 'green'}}>
+                    <View style = {{flex: 2, width: '100%'}}>
                         {itemName === "Rice Dispenser" &&
                             <Image source={require('../assets/rice2.jpeg')} style = {styles.image}/> 
                         }
@@ -47,31 +70,53 @@ class DispensePage extends Component {
                         }
                     </View>
                     
-                    <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
+                    <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center'}}>
                         <Picker
+                            headerStyle = {{backgroundColor: '#588df3'}}
+                            headerTitleStyle = {{ color: '#fff', fontWeight: '500'}}
+                            headerBackButtonTextStyle = {{ color: '#fff'}}
+                            renderHeader={backAction =>
+                                <Header style={{ backgroundColor: "#588df3" }}>
+                                  <Left>
+                                    <Button transparent onPress={backAction}>
+                                      <Icon name="arrow-back" style={{ marginLeft: 5, color: "#fff" }} />
+                                    </Button>
+                                  </Left>
+                                  <Body style={{ flex: 3 }}>
+                                    <Title style={{ color: "#fff" }}>Select Amount</Title>
+                                  </Body>
+                                  <Right />
+                                </Header>}
                             mode="dropdown"
-                            iosIcon={<Icon name="arrow-down" />}
-                            placeholder="Select your SIM"
-                            placeholderStyle={{ color: "#bfc6ea" }}
-                            placeholderIconColor="#007aff"
-                            style={{ width: undefined }}
+                            iosIcon={<Icon name="arrow-down" style={{color: '#588DF3'}}/>}
+                            placeholder="Select Amount (oz)"
+                            placeholderStyle={{ color: '#588DF3'}}
+                            style={{ width: undefined, backgroundColor: '#f7f7f7' }}
                             selectedValue={this.state.selected}
+                            textStyle={{ color: '#588DF3' }}
+                            itemTextStyle={{color: '#588DF3'}}
                             onValueChange={this.onValueChange.bind(this)}
-                            >
-                            <Picker.Item label="Wallet" value="key0" />
-                            <Picker.Item label="ATM Card" value="key1" />
-                            <Picker.Item label="Debit Card" value="key2" />
-                            <Picker.Item label="Credit Card" value="key3" />
-                            <Picker.Item label="Net Banking" value="key4" />
+                        >
+                            <Picker.Item label="0.5 oz" value="key0" />
+                            <Picker.Item label="1.0 oz" value="key1" />
+                            <Picker.Item label="1.5 oz" value="key2" />
+                            <Picker.Item label="2.0 oz" value="key3" />
+                            <Picker.Item label="2.5 oz" value="key4" />
+                            <Picker.Item label="3.0 oz" value="key5" />
+                            <Picker.Item label="3.5 oz" value="key6" />
+                            <Picker.Item label="4.0 oz" value="key7" />
+                            
                         </Picker>
                     </SafeAreaView>
 
                     <View style = {{flex:1, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
-                        <Button rounded info onPress={() => navigation.navigate('Home')} style = {styles.dispenseButton}>
-                            <Text>
-                                Dispense
-                            </Text>
-                        </Button>
+                        <Animated.View style={{opacity: this.state.animation}}>
+                            <Button rounded info onPress={() => this.handleSubmit()} style = {styles.dispenseButton}>
+                                <Text>
+                                    Dispense
+                                </Text>
+                            </Button>
+                        </Animated.View>
                     </View>
                     
                 </Content>
