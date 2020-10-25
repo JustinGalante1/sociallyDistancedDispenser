@@ -22,6 +22,7 @@ class DispensePage extends Component {
             error: undefined,
             animation: new Animated.Value(1),
             imageOpacity: new Animated.Value(0),
+            isModalVisible: false,
         }
     }
     fadeOut() {
@@ -60,15 +61,31 @@ class DispensePage extends Component {
         }
         else{
             this.setState({
-                selected: undefined,
-                error: undefined,
+                error: undefined
             })
             this.fadeOut();
         }
     }
 
+    finishedDispensing(){
+        this.setState({
+            selected: undefined,
+        })
+    }
+
+    handleSubmitAndToggleModal = (event) => {
+        this.handleSubmit(event);
+        if(!(this.state.selected === undefined)){
+            this.toggleModal();
+        }
+    }
+
+    setModalVisible = (visible) => {
+        this.setState({ isModalVisible : visible });
+    }
+
     toggleModal = () => {
-        setModalVisible(!isModalVisible);
+        this.setModalVisible(!this.state.isModalVisible);
     }
 
     render() {
@@ -129,25 +146,35 @@ class DispensePage extends Component {
                             itemTextStyle={{color: '#588DF3'}}
                             onValueChange={this.onValueChange.bind(this)}
                         >
-                            <Picker.Item label="0.5 oz" value="key0" />
-                            <Picker.Item label="1.0 oz" value="key1" />
-                            <Picker.Item label="1.5 oz" value="key2" />
-                            <Picker.Item label="2.0 oz" value="key3" />
-                            <Picker.Item label="2.5 oz" value="key4" />
-                            <Picker.Item label="3.0 oz" value="key5" />
-                            <Picker.Item label="3.5 oz" value="key6" />
-                            <Picker.Item label="4.0 oz" value="key7" />
+                            <Picker.Item label="0.5 oz" value="0.5" />
+                            <Picker.Item label="1.0 oz" value="1" />
+                            <Picker.Item label="1.5 oz" value="1.5" />
+                            <Picker.Item label="2.0 oz" value="2" />
+                            <Picker.Item label="2.5 oz" value="2.5" />
+                            <Picker.Item label="3.0 oz" value="3" />
+                            <Picker.Item label="3.5 oz" value="3.5" />
+                            <Picker.Item label="4.0 oz" value="4" />
                             
                         </Picker>
                     </SafeAreaView>
 
                     <View style = {{flex:1, width: '100%', backgroundColor: 'transparent', alignItems: 'center'}}>
                         <Animated.View style={{opacity: this.state.animation}}>
-                            <Button rounded info onPress={() => this.handleSubmit()} style = {styles.dispenseButton}>
+                            <Button rounded info onPress={this.handleSubmitAndToggleModal} style = {styles.dispenseButton}>
                                 <Text>
                                     Dispense
                                 </Text>
                             </Button>
+                            
+                            <Modal 
+                                isVisible = {this.state.isModalVisible}
+                                onBackdropPress = {() => {this.setModalVisible(false); this.finishedDispensing()}}>
+                                <View style = {styles.modalContent}>
+                                    <Text style = {styles.modalContentTitle}>
+                                        {"Dispensing: " + this.state.selected + " oz"}
+                                    </Text>
+                                </View>
+                            </Modal>
                         </Animated.View>
                         {this.state.error && 
                             <Animated.View style={{opacity: this.state.animation}}>

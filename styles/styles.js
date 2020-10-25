@@ -130,6 +130,18 @@ export const PageStyle = StyleSheet.create(
             color: 'red',
             fontSize: 18,
             fontWeight: '500',
-        }
+        },
+        modalContent: {
+            backgroundColor: 'white',
+            padding: 22,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 4,
+            borderColor: 'rgba(0, 0, 0, 0.1)',
+          },
+          modalContentTitle: {
+            fontSize: 20,
+            marginBottom: 12,
+          },
     }
 )

@@ -3,6 +3,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 //pages
 import LandingPage from './pages/LandingPage';
@@ -17,6 +20,7 @@ export default class App extends React.Component{
     this.state = {
       
     }
+    console.disableYellowBox = true;
   }
 
   render(){
