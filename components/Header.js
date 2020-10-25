@@ -17,7 +17,6 @@ const Header= (props) => {
                     <Button title="Go back" onPress={() => navigation.goBack()} style = {styles.back_button}>
                         <Icon name="arrow-back" style={{color: 'white'}}/>
                     </Button>
-              
                 )
             }
             <Text style = {styles.title}> {props.title}</Text>
