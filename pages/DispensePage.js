@@ -17,9 +17,10 @@ class DispensePage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-             selected: undefined,
-             animation: new Animated.Value(1),
-             imageOpacity: new Animated.Value(0),
+            selected: undefined,
+            error: undefined,
+            animation: new Animated.Value(1),
+            imageOpacity: new Animated.Value(0),
         }
     }
     fadeOut() {
@@ -27,13 +28,13 @@ class DispensePage extends Component {
             toValue : 0,
             timing : 400,
             useNativeDriver: true,
-          }).start(()=>{
+        }).start(()=>{
             Animated.timing(this.state.animation,{
-              toValue : 1,
-              duration : 200,
-              useNativeDriver: true,
+                toValue : 1,
+                duration : 200,
+                useNativeDriver: true,
             }).start();
-          })                       
+        })                       
      }
 
     onValueChange(value) {
@@ -51,10 +52,18 @@ class DispensePage extends Component {
     }
 
     handleSubmit(event){
-        this.setState({
-            selected: undefined,
-        })
-        this.fadeOut();
+        if(this.state.selected === undefined){
+            this.setState({
+                error: "Select an Amount First!"
+            })
+        }
+        else{
+            this.setState({
+                selected: undefined,
+                error: undefined,
+            })
+            this.fadeOut();
+        }
     }
 
     render() {
@@ -136,6 +145,14 @@ class DispensePage extends Component {
                                 </Text>
                             </Button>
                         </Animated.View>
+                        {this.state.error && 
+                            <Animated.View style={{opacity: this.state.animation}}>
+                                <Text style={styles.errorText}>
+                                    {"\n"}
+                                    {this.state.error}
+                                </Text>
+                            </Animated.View>
+                        }
                     </View>
                     
                 </Content>
