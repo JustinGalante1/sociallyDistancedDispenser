@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, Image, Animated } from 'react-native';
+import Modal from 'react-native-modal';
 
 //react-native components
 import {Button, Header, Text, Container, Content, Picker, Icon, View, Left, Right, Body, Title} from 'native-base';
@@ -50,6 +51,10 @@ class DispensePage extends Component {
         this.fadeOut();
     }
 
+    toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    }
+
     render() {
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
@@ -68,7 +73,6 @@ class DispensePage extends Component {
                             <Image source={require('../assets/beans2.jpg')} style = {styles.image}/>
                         }
                     </View>
-
                     <SafeAreaView style = {{flex: .5, width: '100%', backgroundColor: 'transparent', alignItems: 'center', justifyContent: 'center'}}>
                         <Picker
                             headerStyle = {{backgroundColor: '#588df3'}}
