@@ -23,7 +23,7 @@ class DevicesPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: false,
+            loading: true,
             items: [
                 {
                     title: "Rice Dispenser",
@@ -40,10 +40,6 @@ class DevicesPage extends Component {
     }
 
     componentDidMount() {
-        const { loading } = this.state;
-        if(loading){
-            this.animation.play();
-        }
         BleManager.start({ showAlert: false })
   
         this.handlerDiscover = bleManagerEmitter.addListener(
@@ -57,6 +53,11 @@ class DevicesPage extends Component {
         );
     
         this.scanForDevices();
+        const { loading } = this.state;
+        if(loading){
+            console.log("playing");
+            this.animation.play();
+        }
     }
 
     componentWillUnmount(){
@@ -65,6 +66,8 @@ class DevicesPage extends Component {
     }
 
     scanForDevices() {
+        console.log("starting scan");
+        this.setState({loading: true})
         BleManager.scan([], 3);
     }
 
@@ -83,6 +86,7 @@ class DevicesPage extends Component {
         const peripherals = oldperipherals.concat({id: "5", name: "joe"});
         this.setState({ peripherals });
         console.log('Scan is stopped. Devices: ', this.state.peripherals);
+        this.setState({loading: false});
     }
 
     handlePress = (event) => {
