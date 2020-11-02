@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, ImageBackground } from 'react-native';
+import {StyleSheet, View, ImageBackground, NativeModules, NativeEventEmitter} from 'react-native';
 
 //native baes components
 import { Card, Container, Content, Text, CardItem, Icon, Right } from 'native-base';
@@ -13,6 +13,11 @@ import Header from '../components/Header';
 // styles
 import {PageStyle} from '../styles/styles';
 const styles = StyleSheet.flatten(PageStyle);
+
+//bluetooth
+import BleManager from 'react-native-ble-manager';
+const BleManagerModule = NativeModules.BleManager;
+const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 class DevicesPage extends Component {
     constructor(props) {
@@ -29,7 +34,8 @@ class DevicesPage extends Component {
                 {
                     title: "Cereal Dispenser",
                 },
-            ]
+            ],
+            peripherals: [],
         }
     }
 
@@ -38,6 +44,45 @@ class DevicesPage extends Component {
         if(loading){
             this.animation.play();
         }
+        BleManager.start({ showAlert: false })
+  
+        this.handlerDiscover = bleManagerEmitter.addListener(
+            'BleManagerDiscoverPeripheral',
+            this.handleDiscoverPeripheral
+        );
+    
+        this.handlerStop = bleManagerEmitter.addListener(
+            'BleManagerStopScan',
+            this.handleStopScan
+        );
+    
+        this.scanForDevices();
+    }
+
+    componentWillUnmount(){
+        bleManagerEmitter.removeListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral);
+        bleManagerEmitter.removeListener('BleManagerStopScan', this.handleStopScan);
+    }
+
+    scanForDevices() {
+        BleManager.scan([], 3);
+    }
+
+    handleDiscoverPeripheral = (peripheral) => {
+        console.log("peripheral found");
+        const oldperipherals = this.state.peripherals;
+        
+        if (peripheral.name) {
+            const peripherals = oldperipherals.concat({id: peripheral.id, name: peripheral.name});
+            this.setState({ peripherals });
+        }
+    };
+        
+    handleStopScan = () => {
+        const oldperipherals = this.state.peripherals;
+        const peripherals = oldperipherals.concat({id: "5", name: "joe"});
+        this.setState({ peripherals });
+        console.log('Scan is stopped. Devices: ', this.state.peripherals);
     }
 
     handlePress = (event) => {
