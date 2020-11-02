@@ -18,11 +18,11 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "IOSName" 
+      "bundleIdentifier": "sddIOS" 
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "android": { "package": "AndroidName" }
+    "android": { "package": "com.sdd.android" }
   }
 }
