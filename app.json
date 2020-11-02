@@ -17,10 +17,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "IOSName" 
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "android": { "package": "AndroidName" }
   }
 }
