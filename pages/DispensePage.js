@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Image, Animated } from 'react-native';
+import {StyleSheet, Image, Animated, NativeModules, NativeEventEmitter } from 'react-native';
 import Modal from 'react-native-modal';
 
 //react-native components
@@ -12,6 +12,11 @@ import OurHeader from '../components/Header';
 import {PageStyle} from '../styles/styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const styles = StyleSheet.flatten(PageStyle);
+
+//bluetooth
+import BleManager from 'react-native-ble-manager';
+const BleManagerModule = NativeModules.BleManager;
+const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 class DispensePage extends Component {
 
@@ -88,9 +93,23 @@ class DispensePage extends Component {
         this.setModalVisible(!this.state.isModalVisible);
     }
 
+    componentDidMount(){
+        BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" });
+        const { route, navigation } = this.props;
+        const itemName = route.params.itemName;
+        const itemId = route.params.itemId;
+        BleManager.connect(itemId).then(()=>{
+            console.log("connected to ", itemName);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
     render() {
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
+        
 
         var images = [
             require('../assets/rice2.jpeg'),

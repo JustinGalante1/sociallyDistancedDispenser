@@ -40,8 +40,8 @@ class DevicesPage extends Component {
     }
 
     componentDidMount() {
-        BleManager.start({ showAlert: false })
-  
+        BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" })
+        
         this.handlerDiscover = bleManagerEmitter.addListener(
             'BleManagerDiscoverPeripheral',
             this.handleDiscoverPeripheral
@@ -104,14 +104,14 @@ class DevicesPage extends Component {
                     <Content contentContainerStyle = {styles.deviceListContent} scrollEnabled='false'>
                             {!loading &&
                                 <ImageBackground source={require('../assets/LandingBackground.png')} style = {styles.backgroundImageTop}>
-                                    {this.state.items.map((item, index) =>{
+                                    {this.state.peripherals.map((item, index) =>{
                                         return(
                                             <Card key={index} style = {styles.card}>
                                                 <CardItem button onPress={()=>navigation.navigate('Dispense', {
-                                                    itemName: item.title,
+                                                    itemName: item.name, itemId: item.id
                                                 })}>
                                                     <Text style = {styles.buttonText}>
-                                                        {item.title}
+                                                        {item.id} and {item.name}
                                                     </Text>
                                                     <Right style = {{flex: 1}}>
                                                         <Icon name="arrow-forward" style={{color: '#588DF3'}}/>

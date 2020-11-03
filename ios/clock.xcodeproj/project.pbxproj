@@ -16,6 +16,7 @@
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 		D05D2856254FB36100574A92 /* liblottie-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D05D2855254FB36100574A92 /* liblottie-ios.a */; };
 		D05D2858254FB36900574A92 /* liblottie-react-native.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D05D2857254FB36900574A92 /* liblottie-react-native.a */; };
+		D0626F282550D6DE006D67CC /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0626F272550D6DE006D67CC /* ExternalAccessory.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		D05D2855254FB36100574A92 /* liblottie-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D05D2857254FB36900574A92 /* liblottie-react-native.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblottie-react-native.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0626F272550D6DE006D67CC /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -45,6 +47,7 @@
 			files = (
 				D05D2858254FB36900574A92 /* liblottie-react-native.a in Frameworks */,
 				D05D2856254FB36100574A92 /* liblottie-ios.a in Frameworks */,
+				D0626F282550D6DE006D67CC /* ExternalAccessory.framework in Frameworks */,
 				96905EF65AED1B983A6B3ABC /* libPods-clock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +74,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0626F272550D6DE006D67CC /* ExternalAccessory.framework */,
 				D05D2857254FB36900574A92 /* liblottie-react-native.a */,
 				D05D2855254FB36100574A92 /* liblottie-ios.a */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
