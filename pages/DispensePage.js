@@ -28,6 +28,8 @@ class DispensePage extends Component {
             animation: new Animated.Value(1),
             imageOpacity: new Animated.Value(0),
             isModalVisible: false,
+            service: undefined,
+            characteristic: undefined,
         }
     }
     fadeOut() {
@@ -100,6 +102,16 @@ class DispensePage extends Component {
         const itemId = route.params.itemId;
         BleManager.connect(itemId).then(()=>{
             console.log("connected to ", itemName);
+            BleManager.retrieveServices(itemId).then((info)=>{
+                console.log("poopoo: ", info.characteristics);
+                console.log("poopoo: ", info.services);
+            })
+            // BleManager.disconnect(itemId).then(()=>{
+            //     console.log("disconnected");
+            // })
+            .catch((error)=>{
+                console.log(error);
+            })
         })
         .catch((error) => {
             console.log(error);
@@ -109,8 +121,7 @@ class DispensePage extends Component {
     render() {
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
-        
-
+    
         var images = [
             require('../assets/rice2.jpeg'),
             require('../assets/cereal2.jpg'),

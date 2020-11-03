@@ -68,7 +68,7 @@ class DevicesPage extends Component {
     scanForDevices() {
         console.log("starting scan");
         this.setState({loading: true})
-        BleManager.scan([], 3);
+        BleManager.scan(["FFE0"], 3, false);
     }
 
     handleDiscoverPeripheral = (peripheral) => {
