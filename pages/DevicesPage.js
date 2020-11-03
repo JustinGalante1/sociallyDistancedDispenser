@@ -40,7 +40,14 @@ class DevicesPage extends Component {
     }
 
     componentDidMount() {
-        BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" })
+        BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" }).then(()=>{
+            const { loading } = this.state;
+            if(loading){
+                console.log("playing");
+                this.animation.play();
+            }
+            this.scanForDevices();
+        })
         
         this.handlerDiscover = bleManagerEmitter.addListener(
             'BleManagerDiscoverPeripheral',
@@ -52,12 +59,8 @@ class DevicesPage extends Component {
             this.handleStopScan
         );
     
-        this.scanForDevices();
-        const { loading } = this.state;
-        if(loading){
-            console.log("playing");
-            this.animation.play();
-        }
+        
+        
     }
 
     componentWillUnmount(){
