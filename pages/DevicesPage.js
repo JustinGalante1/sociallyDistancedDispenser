@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, ImageBackground, NativeModules, NativeEventEmitter} from 'react-native';
 
 //native baes components
-import { Card, Container, Content, Text, CardItem, Icon, Right } from 'native-base';
+import { Button, Card, Container, Content, Text, CardItem, Icon, Right } from 'native-base';
 
 //animated loader
 import LottieView from "lottie-react-native";
@@ -24,18 +24,17 @@ class DevicesPage extends Component {
         super(props)
         this.state = {
             loading: true,
-            items: [
+            peripherals: [
                 {
-                    title: "Rice Dispenser",
+                    name: "Rice Dispenser",
                 },
                 {
-                    title: "Bean Dispenser",
+                    name: "Bean Dispenser",
                 },
                 {
-                    title: "Cereal Dispenser",
+                    name: "Cereal Dispenser",
                 },
             ],
-            peripherals: [],
         }
     }
 
@@ -43,7 +42,6 @@ class DevicesPage extends Component {
         BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" }).then(()=>{
             const { loading } = this.state;
             if(loading){
-                console.log("playing");
                 this.animation.play();
             }
             this.scanForDevices();
@@ -58,9 +56,6 @@ class DevicesPage extends Component {
             'BleManagerStopScan',
             this.handleStopScan
         );
-    
-        
-        
     }
 
     componentWillUnmount(){
@@ -68,9 +63,23 @@ class DevicesPage extends Component {
         bleManagerEmitter.removeListener('BleManagerStopScan', this.handleStopScan);
     }
 
-    scanForDevices() {
+    scanForDevices(animation) {
+        const initState = {
+            loading: true,
+            peripherals: [
+                {
+                    name: "Rice Dispenser",
+                },
+                {
+                    name: "Bean Dispenser",
+                },
+                {
+                    name: "Cereal Dispenser",
+                },
+            ],
+        }
+        this.setState(initState);
         console.log("starting scan");
-        this.setState({loading: true})
         BleManager.scan(["FFE0"], 3, false);
     }
 
@@ -86,8 +95,6 @@ class DevicesPage extends Component {
         
     handleStopScan = () => {
         const oldperipherals = this.state.peripherals;
-        const peripherals = oldperipherals.concat({id: "5", name: "joe"});
-        this.setState({ peripherals });
         console.log('Scan is stopped. Devices: ', this.state.peripherals);
         this.setState({loading: false});
     }
@@ -114,7 +121,7 @@ class DevicesPage extends Component {
                                                     itemName: item.name, itemId: item.id
                                                 })}>
                                                     <Text style = {styles.buttonText}>
-                                                        {item.id} and {item.name}
+                                                        {item.name}
                                                     </Text>
                                                     <Right style = {{flex: 1}}>
                                                         <Icon name="arrow-forward" style={{color: '#588DF3'}}/>
@@ -123,7 +130,14 @@ class DevicesPage extends Component {
                                             </Card>
                                         )
                                     })}
-                                </ImageBackground>       
+                                <View style={{top: 10}}>
+                                    <Button rounded info onPress={()=> this.scanForDevices(this.animation)} style = {styles.button}>
+                                        <Text>
+                                            Refresh
+                                        </Text>
+                                    </Button>
+                                </View>
+                                </ImageBackground>     
                             }
                             {loading &&
                                 <View style={styles.animationContainer}>

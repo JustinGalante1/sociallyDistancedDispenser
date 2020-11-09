@@ -9,12 +9,20 @@ const Header= (props) => {
     
     const { navigation } = props.navigation;
     const backbutton = props.backbutton;
+    const myProps = props;
+    
+    handlePress = () => {
+        navigation.goBack();
+        if(myProps.action !== undefined){
+            myProps.action();
+        }        
+    }
     return(
         
         <View style={styles.container}>
             {backbutton && 
                 (
-                    <Button title="Go back" onPress={() => navigation.goBack()} style = {styles.back_button}>
+                    <Button title="Go back" onPress={() => this.handlePress()} style = {styles.back_button}>
                         <Icon name="arrow-back" style={{color: 'white'}}/>
                     </Button>
                 )

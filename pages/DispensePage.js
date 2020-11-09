@@ -30,6 +30,7 @@ class DispensePage extends Component {
             isModalVisible: false,
             service: undefined,
             characteristic: undefined,
+            itemId: '',
         }
     }
     fadeOut() {
@@ -95,20 +96,28 @@ class DispensePage extends Component {
         this.setModalVisible(!this.state.isModalVisible);
     }
 
+    disconnectFromDevice(){
+        BleManager.disconnect(this.state.itemId)
+            .then(()=>{
+                console.log("disconnected");
+            })
+            .catch((error) =>{
+                console.log(error);
+            });
+    }
+
     componentDidMount(){
         BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" });
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
         const itemId = route.params.itemId;
+        this.setState({itemId: itemId});
         BleManager.connect(itemId).then(()=>{
             console.log("connected to ", itemName);
             BleManager.retrieveServices(itemId).then((info)=>{
                 console.log("poopoo: ", info.characteristics);
                 console.log("poopoo: ", info.services);
             })
-            // BleManager.disconnect(itemId).then(()=>{
-            //     console.log("disconnected");
-            // })
             .catch((error)=>{
                 console.log(error);
             })
@@ -139,9 +148,8 @@ class DispensePage extends Component {
         }
         return (
             <Container>
-                <OurHeader title = {itemName} navigation = {this.props} backbutton = {true}/>
+                <OurHeader title = {itemName} navigation = {this.props} backbutton = {true} action={this.disconnectFromDevice.bind(this)}/>
                 <Content contentContainerStyle={styles.imageContainer} scrollEnabled='false'>
-                    
                     <View style = {{flex: 2, width: '100%'}}>
                         <Animated.Image source={images[index]} onLoad = {this.onLoad} style = {{
                                     backgroundColor: 'transparent',
