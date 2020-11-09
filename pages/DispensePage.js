@@ -14,6 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const styles = StyleSheet.flatten(PageStyle);
 
 //bluetooth
+import { stringToBytes } from 'convert-string';
 import BleManager from 'react-native-ble-manager';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -31,6 +32,8 @@ class DispensePage extends Component {
             service: undefined,
             characteristic: undefined,
             itemId: '',
+            characteristic: '',
+            service: '',
         }
     }
     fadeOut() {
@@ -72,12 +75,24 @@ class DispensePage extends Component {
                 error: undefined
             })
             this.fadeOut();
+            const data = stringToBytes("m");
+            BleManager.write(this.state.itemId, this.state.service, this.state.characteristic, data).then(() => {
+                console.log("Wrote " + "s" + " as: " + data);
+            }).catch((error) => {
+                console.log(error)
+            })
         }
     }
 
     finishedDispensing(){
         this.setState({
             selected: undefined,
+        })
+        var buff = require('buffer/').Buffer
+        BleManager.read(this.state.itemId, this.state.service, this.state.characteristic).then((readData) => {
+            console.log("Read " + (buff.from(readData)).readUInt8(1, true) + " as: " + readData);
+        }).catch((error) => {
+            console.log(error)
         })
     }
 
@@ -96,6 +111,7 @@ class DispensePage extends Component {
         this.setModalVisible(!this.state.isModalVisible);
     }
 
+
     disconnectFromDevice(){
         BleManager.disconnect(this.state.itemId)
             .then(()=>{
@@ -106,7 +122,12 @@ class DispensePage extends Component {
             });
     }
 
+    bleListener(){
+        
+    }
+
     componentDidMount(){
+        const bluetoothBase = "-0000-1000-8000-00805F9B34FB";
         BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" });
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
@@ -115,8 +136,24 @@ class DispensePage extends Component {
         BleManager.connect(itemId).then(()=>{
             console.log("connected to ", itemName);
             BleManager.retrieveServices(itemId).then((info)=>{
-                console.log("poopoo: ", info.characteristics);
-                console.log("poopoo: ", info.services);
+                console.log("OOGA BOOGA OOGA BOOGA \n\n\n\n\n")
+                console.log("poopoo: ", info);
+                console.log("poopoo: ", typeof info.characteristics[0].characteristic, info.characteristics[0].characteristic);
+                console.log("poopoo: ", typeof info.characteristics[0].service, info.characteristics[0].service);
+
+
+                this.setState({
+                    characteristic: info.characteristics[0].characteristic,
+                    service: info.characteristics[0].service,
+                }).then(()=>{
+                    this.bleListener = bleManagerEmitter.addListener(
+                        'BleManagerDidUpdateValueForCharacteristic',
+                        ({ value, peripheral, characteristic, service }) => {
+                            const data = byesToString(value);
+                            console.log('Received ${data} for characteristic ${characteristic}');
+                        }
+                    );
+                })
             })
             .catch((error)=>{
                 console.log(error);
@@ -125,6 +162,8 @@ class DispensePage extends Component {
         .catch((error) => {
             console.log(error);
         })
+
+        
     }
 
     render() {

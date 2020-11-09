@@ -78,6 +78,7 @@ class DevicesPage extends Component {
                 },
             ],
         }
+
         this.setState(initState);
         console.log("starting scan");
         BleManager.scan(["FFE0"], 3, false);
