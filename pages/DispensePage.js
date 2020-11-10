@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Image, Animated, NativeModules, NativeEventEmitter } from 'react-native';
+import {StyleSheet, Animated, NativeModules, NativeEventEmitter } from 'react-native';
 import Modal from 'react-native-modal';
 
 //react-native components
@@ -77,7 +77,7 @@ class DispensePage extends Component {
             this.fadeOut();
             const data = stringToBytes("m");
             BleManager.write(this.state.itemId, this.state.service, this.state.characteristic, data).then(() => {
-                console.log("Wrote " + "s" + " as: " + data);
+                console.log("Wrote " + "m" + " as: " + data);
             }).catch((error) => {
                 console.log(error)
             })
@@ -87,12 +87,6 @@ class DispensePage extends Component {
     finishedDispensing(){
         this.setState({
             selected: undefined,
-        })
-        var buff = require('buffer/').Buffer
-        BleManager.read(this.state.itemId, this.state.service, this.state.characteristic).then((readData) => {
-            console.log("Read " + (buff.from(readData)).readUInt8(1, true) + " as: " + readData);
-        }).catch((error) => {
-            console.log(error)
         })
     }
 
@@ -111,49 +105,48 @@ class DispensePage extends Component {
         this.setModalVisible(!this.state.isModalVisible);
     }
 
+    bin2string(array){
+        var result = "";
+        for(var i = 0; i < array.length; ++i){
+            result+= (String.fromCharCode(array[i]));
+        }
+        return result;
+    }
 
     disconnectFromDevice(){
         BleManager.disconnect(this.state.itemId)
             .then(()=>{
-                console.log("disconnected");
             })
             .catch((error) =>{
                 console.log(error);
             });
     }
 
-    bleListener(){
-        
-    }
-
-    componentDidMount(){
-        const bluetoothBase = "-0000-1000-8000-00805F9B34FB";
+    async componentDidMount(){
         BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" });
         const { route, navigation } = this.props;
         const itemName = route.params.itemName;
         const itemId = route.params.itemId;
         this.setState({itemId: itemId});
         BleManager.connect(itemId).then(()=>{
-            console.log("connected to ", itemName);
             BleManager.retrieveServices(itemId).then((info)=>{
-                console.log("OOGA BOOGA OOGA BOOGA \n\n\n\n\n")
-                console.log("poopoo: ", info);
-                console.log("poopoo: ", typeof info.characteristics[0].characteristic, info.characteristics[0].characteristic);
-                console.log("poopoo: ", typeof info.characteristics[0].service, info.characteristics[0].service);
-
-
                 this.setState({
                     characteristic: info.characteristics[0].characteristic,
                     service: info.characteristics[0].service,
-                }).then(()=>{
-                    this.bleListener = bleManagerEmitter.addListener(
-                        'BleManagerDidUpdateValueForCharacteristic',
-                        ({ value, peripheral, characteristic, service }) => {
-                            const data = byesToString(value);
-                            console.log('Received ${data} for characteristic ${characteristic}');
-                        }
-                    );
-                })
+                }, () => {
+                    BleManager.startNotification(itemId, this.state.service, this.state.characteristic).then(()=>{
+                        bleManagerEmitter.addListener(
+                            "BleManagerDidUpdateValueForCharacteristic",
+                            readResponse = ({ value, itemId, characteristic, service }) => {
+                                const data = this.bin2string(value);
+                                console.log(`Received ${data} for characteristic ${characteristic}`);
+                            }
+                        );
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    })
+                });
             })
             .catch((error)=>{
                 console.log(error);
@@ -162,8 +155,10 @@ class DispensePage extends Component {
         .catch((error) => {
             console.log(error);
         })
+    }
 
-        
+    componentWillUnmount(){
+        bleManagerEmitter.removeListener("BleManagerDidUpdateValueForCharacteristic", readResponse);
     }
 
     render() {

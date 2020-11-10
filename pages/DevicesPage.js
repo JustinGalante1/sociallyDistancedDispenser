@@ -35,16 +35,21 @@ class DevicesPage extends Component {
                     name: "Cereal Dispenser",
                 },
             ],
+            managerOn: false,
         }
     }
 
     componentDidMount() {
+        bleManagerEmitter.addListener(
+            "BleManagerDidUpdateState", (()=>{this.setState({managerOn: true})})
+        )
         BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" }).then(()=>{
             const { loading } = this.state;
             if(loading){
                 this.animation.play();
             }
             this.scanForDevices();
+            BleManager.checkState();
         })
         
         this.handlerDiscover = bleManagerEmitter.addListener(
@@ -80,14 +85,11 @@ class DevicesPage extends Component {
         }
 
         this.setState(initState);
-        console.log("starting scan");
         BleManager.scan(["FFE0"], 3, false);
     }
 
     handleDiscoverPeripheral = (peripheral) => {
-        console.log("peripheral found");
         const oldperipherals = this.state.peripherals;
-        
         if (peripheral.name) {
             const peripherals = oldperipherals.concat({id: peripheral.id, name: peripheral.name});
             this.setState({ peripherals });
@@ -96,7 +98,6 @@ class DevicesPage extends Component {
         
     handleStopScan = () => {
         const oldperipherals = this.state.peripherals;
-        console.log('Scan is stopped. Devices: ', this.state.peripherals);
         this.setState({loading: false});
     }
 
@@ -144,8 +145,7 @@ class DevicesPage extends Component {
                                 <View style={styles.animationContainer}>
                                     <LottieView ref={animation => { this.animation = animation }} style={{width:450, height:300}} source={require('../assets/loading.json')}/>
                                 </View>
-                            }
-                        
+                            }    
                     </Content> 
             </Container>
         )
