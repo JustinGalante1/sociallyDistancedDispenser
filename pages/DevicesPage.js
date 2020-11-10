@@ -42,7 +42,8 @@ class DevicesPage extends Component {
     componentDidMount() {
         bleManagerEmitter.addListener(
             "BleManagerDidUpdateState", (()=>{this.setState({managerOn: true})})
-        )
+        );
+
         BleManager.start({ showAlert: false, restoreIdentifierKey: "fuck you" }).then(()=>{
             const { loading } = this.state;
             if(loading){
@@ -83,7 +84,6 @@ class DevicesPage extends Component {
                 },
             ],
         }
-
         this.setState(initState);
         BleManager.scan(["FFE0"], 3, false);
     }
