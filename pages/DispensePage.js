@@ -139,6 +139,10 @@ class DispensePage extends Component {
                             "BleManagerDidUpdateValueForCharacteristic",
                             readResponse = ({ value, itemId, characteristic, service }) => {
                                 const data = this.bin2string(value);
+                                if (data == "success"){
+                                    this.setModalVisible(false)
+                                    this.finishedDispensing()
+                                }
                                 console.log(`Received ${data} for characteristic ${characteristic}`);
                             }
                         );
@@ -239,8 +243,7 @@ class DispensePage extends Component {
                             </Button>
                             
                             <Modal 
-                                isVisible = {this.state.isModalVisible}
-                                onBackdropPress = {() => {this.setModalVisible(false); this.finishedDispensing()}}>
+                                isVisible = {this.state.isModalVisible}>
                                 <View style = {styles.modalContent}>
                                     <Text style = {styles.modalContentTitle}>
                                         {"Dispensing: " + this.state.selected + " oz"}
