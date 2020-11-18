@@ -34,6 +34,7 @@ class DispensePage extends Component {
             itemId: '',
             characteristic: '',
             service: '',
+            modalMessage: '',
         }
     }
     fadeOut() {
@@ -75,11 +76,14 @@ class DispensePage extends Component {
                 error: undefined
             })
             this.fadeOut();
-            const data = stringToBytes("m");
+            const data = stringToBytes(this.state.selected);
             BleManager.write(this.state.itemId, this.state.service, this.state.characteristic, data).then(() => {
-                console.log("Wrote " + "m" + " as: " + data);
+                console.log("Wrote " + this.state.selected + " as: " + data);
             }).catch((error) => {
                 console.log(error)
+            });
+            this.setState({
+                modalMessage: `Dispensing: ${this.state.selected} oz`
             })
         }
     }
@@ -139,9 +143,11 @@ class DispensePage extends Component {
                             "BleManagerDidUpdateValueForCharacteristic",
                             readResponse = ({ value, itemId, characteristic, service }) => {
                                 const data = this.bin2string(value);
-                                if (data == "success"){
-                                    this.setModalVisible(false)
+                                if (data == "Successfully Dispensed"){
+                                    // this.setModalVisible(false)
                                     this.finishedDispensing()
+                                    this.setState({modalMessage: data});
+                                    setTimeout(()=>this.setModalVisible(false), 2000);
                                 }
                                 console.log(`Received ${data} for characteristic ${characteristic}`);
                             }
@@ -222,13 +228,9 @@ class DispensePage extends Component {
                             itemTextStyle={{color: '#588DF3'}}
                             onValueChange={this.onValueChange.bind(this)}
                         >
-                            <Picker.Item label="0.5 oz" value="0.5" />
                             <Picker.Item label="1.0 oz" value="1" />
-                            <Picker.Item label="1.5 oz" value="1.5" />
                             <Picker.Item label="2.0 oz" value="2" />
-                            <Picker.Item label="2.5 oz" value="2.5" />
                             <Picker.Item label="3.0 oz" value="3" />
-                            <Picker.Item label="3.5 oz" value="3.5" />
                             <Picker.Item label="4.0 oz" value="4" />
                             
                         </Picker>
@@ -246,7 +248,7 @@ class DispensePage extends Component {
                                 isVisible = {this.state.isModalVisible}>
                                 <View style = {styles.modalContent}>
                                     <Text style = {styles.modalContentTitle}>
-                                        {"Dispensing: " + this.state.selected + " oz"}
+                                        {this.state.modalMessage}
                                     </Text>
                                 </View>
                             </Modal>

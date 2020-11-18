@@ -132,14 +132,14 @@ class DevicesPage extends Component {
                                             </Card>
                                         )
                                     })}
-                                <View style={{top: 10}}>
-                                    <Button rounded info onPress={()=> this.scanForDevices(this.animation)} style = {styles.button}>
-                                        <Text>
-                                            Refresh
-                                        </Text>
-                                    </Button>
-                                </View>
-                                </ImageBackground>     
+                                    <View style={{top: 10}}>
+                                        <Button rounded info onPress={()=> this.scanForDevices(this.animation)} style = {styles.button}>
+                                            <Text>
+                                                Refresh
+                                            </Text>
+                                        </Button>
+                                    </View>
+                                </ImageBackground>
                             }
                             {loading &&
                                 <View style={styles.animationContainer}>

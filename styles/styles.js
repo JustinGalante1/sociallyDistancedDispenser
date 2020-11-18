@@ -138,10 +138,11 @@ export const PageStyle = StyleSheet.create(
             alignItems: 'center',
             borderRadius: 4,
             borderColor: 'rgba(0, 0, 0, 0.1)',
-          },
-          modalContentTitle: {
+        },
+        modalContentTitle: {
             fontSize: 20,
             marginBottom: 12,
-          },
+            color: '#588DF3',
+        },
     }
 )
