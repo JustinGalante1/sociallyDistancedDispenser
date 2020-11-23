@@ -178,7 +178,8 @@ class DispensePage extends Component {
         var images = [
             require('../assets/rice2.jpeg'),
             require('../assets/cereal2.jpg'),
-            require('../assets/beans2.jpg')
+            require('../assets/beans2.jpg'),
+            require('../assets/chickpeas.jpg'),
         ]
 
         if(itemName === "Rice Dispenser"){
@@ -186,6 +187,9 @@ class DispensePage extends Component {
         }
         else if(itemName === "Cereal Dispenser"){
             var index = 1;
+        }
+        else if(itemName === "Chickpea Dispenser"){
+            var index = 3;
         }
         else{
             var index = 2;

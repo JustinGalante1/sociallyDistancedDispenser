@@ -91,6 +91,9 @@ class DevicesPage extends Component {
     handleDiscoverPeripheral = (peripheral) => {
         const oldperipherals = this.state.peripherals;
         if (peripheral.name) {
+            if(peripheral.name == "DSD TECH"){
+                peripheral.name = "Chickpea Dispenser";
+            }
             const peripherals = oldperipherals.concat({id: peripheral.id, name: peripheral.name});
             this.setState({ peripherals });
         }
