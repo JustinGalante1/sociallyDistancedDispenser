@@ -79,12 +79,24 @@ class DispensePage extends Component {
             const data = stringToBytes(this.state.selected);
             BleManager.write(this.state.itemId, this.state.service, this.state.characteristic, data).then(() => {
                 console.log("Wrote " + this.state.selected + " as: " + data);
+                this.setState({
+                    modalMessage: `Dispensing: ${this.state.selected} oz`
+                }, ()=> {
+                    setTimeout(()=>{
+                        this.setState({modalMessage: "Error Dispensing"});
+                    }, 5000);
+                    setTimeout(()=>{
+                        this.setModalVisible(false);
+                        BleManager.write(this.state.itemId, this.state.service, this.state.characteristic, stringToBytes("z")).then(()=>{
+                            console.log("sent timeout message");
+                        })
+                        .catch(()=>{
+                            console.log("error sending timeout message");
+                        })
+                    }, 7000)});
             }).catch((error) => {
                 console.log(error)
             });
-            this.setState({
-                modalMessage: `Dispensing: ${this.state.selected} oz`
-            })
         }
     }
 
@@ -143,12 +155,9 @@ class DispensePage extends Component {
                             "BleManagerDidUpdateValueForCharacteristic",
                             readResponse = ({ value, itemId, characteristic, service }) => {
                                 const data = this.bin2string(value);
-                                if (data == "Successfully Dispensed"){
-                                    // this.setModalVisible(false)
-                                    this.finishedDispensing()
-                                    this.setState({modalMessage: data});
-                                    setTimeout(()=>this.setModalVisible(false), 2000);
-                                }
+                                this.finishedDispensing();
+                                this.setState({modalMessage: data});
+                                setTimeout(()=>this.setModalVisible(false), 2000);
                                 console.log(`Received ${data} for characteristic ${characteristic}`);
                             }
                         );

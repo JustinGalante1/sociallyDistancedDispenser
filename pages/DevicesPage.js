@@ -71,7 +71,7 @@ class DevicesPage extends Component {
 
     scanForDevices(animation) {
         const initState = {
-            loading: true,
+            loading: false,
             peripherals: [
                 {
                     name: "Rice Dispenser",
@@ -85,7 +85,7 @@ class DevicesPage extends Component {
             ],
         }
         this.setState(initState);
-        BleManager.scan(["FFE0"], 3, false);
+        BleManager.scan(["FFE0"], 1, false);
     }
 
     handleDiscoverPeripheral = (peripheral) => {
