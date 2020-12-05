@@ -84,7 +84,7 @@ class DispensePage extends Component {
                 }, ()=> {
                     setTimeout(()=>{
                         this.setState({modalMessage: "Error Dispensing"});
-                    }, 5000);
+                    }, 7500);
                     setTimeout(()=>{
                         this.setModalVisible(false);
                         BleManager.write(this.state.itemId, this.state.service, this.state.characteristic, stringToBytes("z")).then(()=>{
@@ -93,7 +93,7 @@ class DispensePage extends Component {
                         .catch(()=>{
                             console.log("error sending timeout message");
                         })
-                    }, 7000)});
+                    }, 9500)});
             }).catch((error) => {
                 console.log(error)
             });
